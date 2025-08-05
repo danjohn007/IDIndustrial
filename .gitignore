@@ -1,0 +1,53 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Archivos de configuración local
+.env
+.env.local
+.env.production
+
+# Archivos temporales
+/tmp/
+temp/
+
+# Archivos de cache
+cache/
+*.cache
+
+# Directorios de dependencias (si se usan)
+node_modules/
+vendor/
+
+# Archivos de respaldo
+*.bak
+*.backup
+*.old
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos subidos por usuarios (mantener el directorio pero no el contenido)
+uploads/*
+!uploads/.gitkeep
+
+# Archivos de base de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de configuración específicos del servidor
+config/local.php
+config/production.php
+
+# Archivos de error y debug
+error.log
+debug.log
+php_errors.log
