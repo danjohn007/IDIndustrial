@@ -19,7 +19,8 @@ spl_autoload_register(function ($class_name) {
         __DIR__ . '/../models/',
         __DIR__ . '/../controllers/',
         __DIR__ . '/../helpers/',
-        __DIR__ . '/../config/'
+        __DIR__ . '/../config/',
+        __DIR__ . '/../routes/'
     ];
     
     foreach ($directories as $directory) {
