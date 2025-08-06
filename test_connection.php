@@ -40,7 +40,7 @@ try {
         echo "<div style='color: green; font-weight: bold;'>✓ Conexión exitosa a la base de datos</div>\n";
         
         // Probar una consulta simple
-        $result = $db->fetchOne("SELECT NOW() as current_time, DATABASE() as database_name, USER() as current_user");
+        $result = $db->fetchOne("SELECT NOW() as current_time, DATABASE() as database_name, CURRENT_USER() as current_user");
         
         if ($result) {
             echo "<h4>Información de la Conexión:</h4>\n";
