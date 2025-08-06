@@ -1,12 +1,12 @@
 <?php
 /**
- * Página Principal - Formulario de Solicitud
+ * Página Principal del Sistema
  * Sistema de Solicitud de Servicios - ID INDUSTRIAL
  */
 
 // Incluir configuraciones
-require_once 'config/config.php';
-require_once 'controllers/SolicitudController.php';
+require_once '../config/config.php';
+require_once '../controllers/SolicitudController.php';
 
 // Crear instancia del controlador
 $solicitudController = new SolicitudController();

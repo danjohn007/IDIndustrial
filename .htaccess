@@ -9,7 +9,7 @@ ServerSignature Off
 
 # Prevenir acceso a archivos de configuración
 <Files "*.php">
-    <FilesMatch "^(config|includes)/">
+    <FilesMatch "^(config|classes|models|controllers|views)/">
         Order Deny,Allow
         Deny from all
     </FilesMatch>
@@ -22,7 +22,7 @@ ServerSignature Off
 </FilesMatch>
 
 # Configuración de URL amigables
-RewriteBase /solicitudes/
+RewriteBase /admin/
 
 # Redireccionar www a no-www (opcional)
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
@@ -32,10 +32,11 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Página principal
+# Redirigir desde raíz a public
+RewriteCond %{REQUEST_URI} !^/admin/public/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^$ index.php [L]
+RewriteRule ^(.*)$ public/$1 [L]
 
 # Configuración de caché para recursos estáticos
 <IfModule mod_expires.c>
@@ -62,5 +63,5 @@ RewriteRule ^$ index.php [L]
 </IfModule>
 
 # Configuración de errores personalizados
-ErrorDocument 404 /solicitudes/index.php
-ErrorDocument 500 /solicitudes/index.php
+ErrorDocument 404 /admin/public/index.php
+ErrorDocument 500 /admin/public/index.php

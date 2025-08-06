@@ -5,12 +5,13 @@
  */
 
 // URL Base del sistema
-define('BASE_URL', 'https://idindustrial.com.mx/solicitudes/');
+define('BASE_URL', 'https://idindustrial.com.mx/admin/');
 
 // Configuración de la aplicación
 define('APP_NAME', 'ID INDUSTRIAL - Sistema de Solicitudes');
 define('APP_VERSION', '1.0.0');
 define('APP_TIMEZONE', 'America/Mexico_City');
+define('APP_DEBUG', true); // Cambiar a false en producción
 
 // Configuración de sesión
 define('SESSION_LIFETIME', 3600); // 1 hora
