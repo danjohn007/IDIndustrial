@@ -39,17 +39,49 @@ try {
     if ($connection) {
         echo "<div style='color: green; font-weight: bold;'>✓ Conexión exitosa a la base de datos</div>\n";
         
-        // Probar una consulta simple
-        $result = $db->fetchOne("SELECT NOW() as current_time, DATABASE() as database_name, CURRENT_USER() as current_user");
+        // Probar consultas individuales para mejor compatibilidad
+        // Dividimos en consultas separadas para manejar posibles incompatibilidades
+        // con diferentes versiones de MySQL/MariaDB o falta de privilegios
+        echo "<h4>Información de la Conexión:</h4>\n";
+        echo "<ul>\n";
         
-        if ($result) {
-            echo "<h4>Información de la Conexión:</h4>\n";
-            echo "<ul>\n";
-            echo "<li><strong>Tiempo del Servidor:</strong> " . $result['current_time'] . "</li>\n";
-            echo "<li><strong>Base de Datos Activa:</strong> " . $result['database_name'] . "</li>\n";
-            echo "<li><strong>Usuario Conectado:</strong> " . $result['current_user'] . "</li>\n";
-            echo "</ul>\n";
+        // Consulta 1: Obtener tiempo del servidor (NOW())
+        try {
+            $timeResult = $db->fetchOne("SELECT NOW() as current_time");
+            if ($timeResult && isset($timeResult['current_time'])) {
+                echo "<li><strong>Tiempo del Servidor:</strong> " . $timeResult['current_time'] . "</li>\n";
+            } else {
+                echo "<li><strong>Tiempo del Servidor:</strong> <em style='color: orange;'>No disponible</em></li>\n";
+            }
+        } catch (Exception $e) {
+            echo "<li><strong>Tiempo del Servidor:</strong> <em style='color: red;'>Error: " . htmlspecialchars($e->getMessage()) . "</em></li>\n";
         }
+        
+        // Consulta 2: Obtener nombre de la base de datos (DATABASE())
+        try {
+            $dbResult = $db->fetchOne("SELECT DATABASE() as database_name");
+            if ($dbResult && isset($dbResult['database_name'])) {
+                echo "<li><strong>Base de Datos Activa:</strong> " . $dbResult['database_name'] . "</li>\n";
+            } else {
+                echo "<li><strong>Base de Datos Activa:</strong> <em style='color: orange;'>No disponible</em></li>\n";
+            }
+        } catch (Exception $e) {
+            echo "<li><strong>Base de Datos Activa:</strong> <em style='color: red;'>Error: " . htmlspecialchars($e->getMessage()) . "</em></li>\n";
+        }
+        
+        // Consulta 3: Obtener usuario actual (CURRENT_USER())
+        try {
+            $userResult = $db->fetchOne("SELECT CURRENT_USER() as current_user");
+            if ($userResult && isset($userResult['current_user'])) {
+                echo "<li><strong>Usuario Conectado:</strong> " . $userResult['current_user'] . "</li>\n";
+            } else {
+                echo "<li><strong>Usuario Conectado:</strong> <em style='color: orange;'>No disponible</em></li>\n";
+            }
+        } catch (Exception $e) {
+            echo "<li><strong>Usuario Conectado:</strong> <em style='color: red;'>Error: " . htmlspecialchars($e->getMessage()) . "</em></li>\n";
+        }
+        
+        echo "</ul>\n";
         
     } else {
         echo "<div style='color: red; font-weight: bold;'>✗ Error: No se pudo establecer la conexión</div>\n";
