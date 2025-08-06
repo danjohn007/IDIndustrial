@@ -5,12 +5,13 @@
  */
 
 // URL Base del sistema
-define('BASE_URL', 'https://idindustrial.com.mx/solicitudes/');
+define('BASE_URL', 'https://idindustrial.com.mx/admin/');
 
 // Configuración de la aplicación
 define('APP_NAME', 'ID INDUSTRIAL - Sistema de Solicitudes');
 define('APP_VERSION', '1.0.0');
 define('APP_TIMEZONE', 'America/Mexico_City');
+define('APP_DEBUG', true); // Cambiar a false en producción
 
 // Configuración de sesión
 define('SESSION_LIFETIME', 3600); // 1 hora
@@ -26,6 +27,12 @@ define('MAX_FILE_SIZE', 5242880); // 5MB
 
 // Establecer zona horaria
 date_default_timezone_set(APP_TIMEZONE);
+
+// Inicializar sesión si no está activa
+if (session_status() == PHP_SESSION_NONE) {
+    session_name(SESSION_NAME);
+    session_start();
+}
 
 // Incluir configuración de base de datos
 require_once __DIR__ . '/database.php';
