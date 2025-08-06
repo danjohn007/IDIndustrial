@@ -4,6 +4,7 @@
  * Sistema de Solicitud de Servicios - ID INDUSTRIAL
  */
 
+require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../classes/Database.php';
 
 class Usuario {

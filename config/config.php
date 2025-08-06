@@ -28,6 +28,12 @@ define('MAX_FILE_SIZE', 5242880); // 5MB
 // Establecer zona horaria
 date_default_timezone_set(APP_TIMEZONE);
 
+// Inicializar sesión si no está activa
+if (session_status() == PHP_SESSION_NONE) {
+    session_name(SESSION_NAME);
+    session_start();
+}
+
 // Incluir configuración de base de datos
 require_once __DIR__ . '/database.php';
 
